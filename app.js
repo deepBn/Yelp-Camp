@@ -46,7 +46,7 @@ app.post("/campgrounds", function (req, res) {
         image: image,
         description: desc
     };
-    
+
     Campground.create(newCampground, function (err, newlyCreated) {
         if (err) {
             console.log(err);
@@ -58,8 +58,7 @@ app.post("/campgrounds", function (req, res) {
 
 //SHOW ROUTE
 app.get("/campgrounds/:id", function (req, res) {
-    var id = req.params.id;
-    Campground.findById(id, function (err, campground) {
+    Campground.findById(req.params.id).populate("comments").exec(function (err, campground) {
         if (err) {
             console.log(err);
         } else {
