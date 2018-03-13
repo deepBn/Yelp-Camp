@@ -30,7 +30,7 @@ function seedDB() {
         } else {
             console.log("Cleared DB successfully!");
             //Add few campgrounds
-            data.forEach(function (seed) {
+            /* data.forEach(function (seed) {
                 Campground.create(seed, function (err, campground) {
                     if (err) {
                         console.log(err);
@@ -50,7 +50,7 @@ function seedDB() {
                         });
                     }
                 });
-            });
+            }); */
         }
     });
 }
