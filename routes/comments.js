@@ -18,6 +18,7 @@ router.get("/new", isLoggedIn, function (req, res) {
     });
 });
 
+//POST ROUTE
 router.post("/", isLoggedIn, function (req, res) {
     Campground.findById(req.params.id, function (err, campground) {
         if (err) {
