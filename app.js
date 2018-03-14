@@ -6,9 +6,9 @@ var passport = require("passport");
 var LocalStrategy = require("passport-local");
 var methodOverride = require("method-override");
 var User = require("./models/user");
-var Campground = require("./models/campground");
-var Comment = require("./models/comment");
-var SeedDB = require("./seeds");
+// var Campground = require("./models/campground");
+// var Comment = require("./models/comment");
+// var SeedDB = require("./seeds");
 
 var indexRoutes = require("./routes/index");
 var campgroundRoutes = require("./routes/campgrounds");

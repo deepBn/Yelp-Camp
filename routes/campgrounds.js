@@ -36,7 +36,7 @@ router.post("/", isLoggedIn, function (req, res) {
         author: author
     };
 
-    Campground.create(newCampground, function (err, newlyCreated) {
+    Campground.create(newCampground, function (err) {
         if (err) {
             console.log(err);
         } else {
@@ -62,7 +62,7 @@ router.get("/:id", function (req, res) {
 router.get("/:id/edit", function (req, res) {
     Campground.findById(req.params.id, function (err, campground) {
         if (err) {
-            console.log(err)
+            console.log(err);
         } else {
             res.render("campgrounds/edit", {
                 campground: campground
@@ -73,11 +73,22 @@ router.get("/:id/edit", function (req, res) {
 
 //UPDATE ROUTE
 router.put("/:id", function (req, res) {
-    Campground.findByIdAndUpdate(req.params.id, req.body.campground, function (err, campground) {
+    Campground.findByIdAndUpdate(req.params.id, req.body.campground, function (err) {
         if (err) {
             console.log(err);
         } else {
             res.redirect("/campgrounds/" + req.params.id);
+        }
+    });
+});
+
+//DESTROY ROUTE
+router.delete("/:id", function(req, res) {
+    Campground.findByIdAndRemove(req.params.id, function(err) {
+        if(err) {
+            console.log(err);
+        } else {
+            res.redirect("/campgrounds");
         }
     });
 });
