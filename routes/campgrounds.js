@@ -24,6 +24,7 @@ router.get("/new", middleware.isLoggedIn, function (req, res) {
 //CREATE ROUTE
 router.post("/", middleware.isLoggedIn, function (req, res) {
     var name = req.body.name;
+    var price = req.body.price;
     var image = req.body.image;
     var desc = req.body.desc;
     var author = {
@@ -32,6 +33,7 @@ router.post("/", middleware.isLoggedIn, function (req, res) {
     };
     var newCampground = {
         name: name,
+        price: price,
         image: image,
         description: desc,
         author: author
@@ -49,8 +51,9 @@ router.post("/", middleware.isLoggedIn, function (req, res) {
 //SHOW ROUTE
 router.get("/:id", function (req, res) {
     Campground.findById(req.params.id).populate("comments").exec(function (err, campground) {
-        if (err) {
-            console.log(err);
+        if (err || !campground) {
+            req.flash("error", "Campground not found!");
+            res.redirect("back");
         } else {
             res.render("campgrounds/show", {
                 campground: campground
@@ -63,7 +66,8 @@ router.get("/:id", function (req, res) {
 router.get("/:id/edit", middleware.checkCampgroundOwnership, function (req, res) {
     Campground.findById(req.params.id, function (err, campground) {
         if (err) {
-            console.log(err);
+            req.flash("error", err.message);
+            res.redirect("/campgrounds");
         } else {
             res.render("campgrounds/edit", {
                 campground: campground
@@ -78,6 +82,7 @@ router.put("/:id", middleware.checkCampgroundOwnership, function (req, res) {
         if (err) {
             console.log(err);
         } else {
+            req.flash("success", "Updated campground successfully");
             res.redirect("/campgrounds/" + req.params.id);
         }
     });
@@ -89,6 +94,7 @@ router.delete("/:id", middleware.checkCampgroundOwnership, function (req, res) {
         if (err) {
             console.log(err);
         } else {
+            req.flash("success", "Deleted campground successfully");
             res.redirect("/campgrounds");
         }
     });
