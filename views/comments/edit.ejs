@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row">
         <h1 style="text-align: center">Edit comment</h1>
-        <div style="width: 30%; margin: 25px auto">
+        <div id="form-container">
             <form method="POST" action="/campgrounds/<%= campground_id %>/comments/<%= comment["_id"] %>?_method=PUT">
                 <div class="form-group">
                     <input type="text" name="comment[text]" placeholder="Enter text" class="form-control" value="<%= comment["text"] %>">

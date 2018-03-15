@@ -1,17 +1,19 @@
 <% include partials/header %>
 
-<div style="width: 30%; margin: 25px auto">
-    <form method="POST" action="/login">
-        <div class="form-group">
-            <input type="text" name="username" placeholder="Username" class="form-control">
-        </div>
-        <div class="form-group">
-            <input type="password" name="password" placeholder="Password" class="form-control">
-        </div>
-        <div class="form-group">
-            <button class="btn btn-primary btn-lg btn-block">Login</button>
-        </div> 
-    </form>
+<div class="container">
+    <div id="form-container">
+        <form method="POST" action="/login">
+            <div class="form-group">
+                <input type="text" name="username" placeholder="Username" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Password" class="form-control">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-lg btn-block">Login</button>
+            </div> 
+        </form>
+    </div>
 </div>
 
 <% include partials/footer %>
