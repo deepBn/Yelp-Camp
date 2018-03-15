@@ -1,5 +1,6 @@
 var express = require("express");
 var app = express();
+var flash = require("connect-flash");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var passport = require("passport");
@@ -23,6 +24,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(methodOverride("_method"));
+app.use(flash());
 
 //AUTH CONFIG
 app.use(require("express-session")({
@@ -35,9 +37,14 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-//PASS THE USER DATA TO ALL ROUTES
+
+//PASS DATA TO VIEWS DIRECTORY
 app.use(function (req, res, next) {
+    //PASS THE USER DATA TO ALL ROUTES
     res.locals.currentUser = req.user;
+    //PASS THE FLASH MESSAGE TO ALL ROUTES
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
     next();
 });
 
