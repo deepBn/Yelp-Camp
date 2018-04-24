@@ -17,6 +17,11 @@ router.post("/register", function (req, res) {
     var newUser = new User({
         username: req.body.username
     });
+
+    //Check if the new user is admin
+    if (req.body.adminCode === "admin1223") {
+        newUser.isAdmin = true;
+    }
     User.register(newUser, req.body.password, function (err, user) {
         if (err) {
             req.flash("error", err.message);
