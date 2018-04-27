@@ -13,12 +13,14 @@ router.get("/", function (req, res) {
             if (err) {
                 console.log(err);
             } else {
-                if(campgrounds.length < 1) {
-                    var noMatch = "No campgrounds match that query, Please try again.";
+                if (campgrounds.length < 1) {
+                    req.flash("error", "No campgrounds match that query, Please try again.");
+                    res.redirect("/campgrounds");
+                } else {
+                    res.render("campgrounds/index", {
+                        campgrounds: campgrounds
+                    });
                 }
-                res.render("campgrounds/index", {
-                    campgrounds: campgrounds
-                });
             }
         });
     } else {
