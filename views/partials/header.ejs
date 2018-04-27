@@ -34,6 +34,12 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/campgrounds">Campgrounds</a></li>
                 </ul>
+                <form action="/campgrounds" method="GET" class="navbar-form navbar-left" id="search-box">
+                    <div class="form-group">
+                        <input type="text" name="search" placeholder="Campground Search...." class="form-control">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </form>
                 <ul class="nav navbar-nav navbar-right">
                     <% if(!currentUser) { %>
                         <li><a href="/login">Login</a></li>
