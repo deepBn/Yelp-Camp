@@ -6,6 +6,7 @@ var middleware = require("../middleware");
 //INDEX ROUTE
 router.get("/", function (req, res) {
     if (req.query.search) {
+        //console.log(escapeRegex(req.query.search));
         var regex = new RegExp(escapeRegex(req.query.search), "gi");
         Campground.find({
             name: regex
@@ -122,7 +123,8 @@ router.delete("/:id", middleware.checkCampgroundOwnership, function (req, res) {
 
 //Fuzzy search regular expression
 function escapeRegex(text) {
-    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+    //return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\|$&");
 };
 
 module.exports = router;
